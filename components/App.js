@@ -1,49 +1,76 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from 'react';
+import { StyleSheet, View, FlatList } from 'react-native';
+import api from './services/api';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import Item from './Item/Item';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class App extends Component {
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
+	state = {
+		data: [],
+	}
+
+	componentDidMount(){
+		this.loadProjects();
+	}
+
+	loadProjects = async () => {
+		const response = await api.get();
+		this.setState({
+			data: response.data
+		});
+	}
+
+	renderItem = ({ item }) => (
+		<Item item={item}/>
+	)
+
+	render() {
+		console.log(this.state.data);
+		return (
+			<View style={styles.container}>
+				<FlatList 
+					data={this.state.data}
+					keyExtractor={item => item.id}
+					renderItem={this.renderItem}
+					contentContainerStyle={styles.list} />
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+	container: {
+		flex: 1,
+		backgroundColor: '#fafafa'
+	},
+	list: {
+		padding: 10
+	},
+    // productTitle: {
+    //     fontSize: 18,
+    //     fontWeight: 'bold',
+    //     color: '#333'
+    // },
+    // productDescription: {
+    //     fontSize: 16,
+    //     color: '#999',
+    //     marginTop: 5,
+    //     lineHeight: 24
+    // },
+    // productButton: {
+    //     height: 42,
+    //     borderRadius: 5,
+    //     borderWidth: 2,
+    //     borderColor: '#DA552F',
+    //     backgroundColor: 'transparent',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     marginTop: 10
+    // },
+    // productButtonText: {
+    //     color: '#DA552F',
+    //     fontSize: 16,
+    //     fontWeight: 'bold'
+    // }
 });
