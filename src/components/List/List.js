@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import Item from '../Item/Item';
+import Item from './Item/Item';
 
 export default class List extends Component {
 
