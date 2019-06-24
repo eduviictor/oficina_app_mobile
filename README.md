@@ -8,7 +8,9 @@
 
 ### Instalação
 
-Primeiro passo. Entre na pasta e instale suas dependências.
+Clone o projeto.
+
+Após isso, entre na pasta e instale suas dependências.
 
 ```sh
 $ cd oficina_app_mobile
