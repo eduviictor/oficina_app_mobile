@@ -1,12 +1,7 @@
-import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Button, Alert } from 'react-native'
-import Modal from "react-native-modal"
+import React, { Component } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
 export default class Item extends Component {
-
-    state = {
-        modalVisible: false
-    }
 
     showAlert = () => {
         Alert.alert(
@@ -23,16 +18,16 @@ export default class Item extends Component {
             <TouchableOpacity onPress={this.showAlert}>
                 <View style={styles.itemContainer}>
                     <View style={styles.viewItem}>
-                        <Text>Cliente: </Text>
-                        <Text >{this.props.item.customer}</Text>
+                        <Text style={styles.label}>Cliente: </Text>
+                        <Text style={styles.value}>{this.props.item.customer}</Text>
                     </View>
                     <View style={styles.viewItem}>
-                        <Text>Valor: </Text>
-                        <Text >{this.props.item.value}</Text>
+                        <Text style={styles.label}>Valor: </Text>
+                        <Text style={styles.value}>{this.props.item.value}</Text>
                     </View>
                     <View style={styles.viewItem}>
-                        <Text>Vendedor: </Text>
-                        <Text >{this.props.item.seller}</Text>
+                        <Text style={styles.label}>Vendedor: </Text>
+                        <Text style={styles.value}>{this.props.item.seller}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -55,9 +50,11 @@ const styles = StyleSheet.create({
 	},
 	viewItem: {
 		flex: 1,
-        flexDirection: 'row'
-	},	
-	itemCliente: {
-		
-	}
+        flexDirection: 'row',
+        justifyContent: 'center',
+        fontSize: 16
+    },
+    label: {
+        fontWeight: 'bold',
+    }
 })
